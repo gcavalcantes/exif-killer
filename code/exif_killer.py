@@ -64,6 +64,10 @@ def getExif(image):
     image_members = []
     image_members.append(dir(image))
 
+    print("\nMaker: " + image.make)
+    print("\nMaker: " + image.software)
+    print("\nModel: " + image.model + "\n")
+
     for index, image_member_list in enumerate(image_members):
         print(f"Image {index} contains {len(image_member_list)} members:")
         print(f"{image_member_list}\n")
@@ -73,6 +77,15 @@ def killExif(image):
     #image.delete('gps_latitude')
     # remove in production
     print("EXIF data deleted")
+
+# List the available information keys of an image
+def listInfo(image):
+    image_members = []
+    image_members.append(dir(image))
+
+    for index, image_member_list in enumerate(image_members):
+        print(f"Image {index} contains {len(image_member_list)} members:")
+        print(f"{image_member_list}\n")
 
 # Testing the function
 exifKiller('/Users/Cliente/Pictures/Saved Pictures/temp/bsg1.jpg')
