@@ -21,6 +21,7 @@ def exifKiller(file_path):
                     getExif(image)
                     # Erases the exif data
                     killExif(image)
+                    getExif(image)
                     # TODO Checks if the data has been erased
                     # TODO Show message that confirms that the data has bee erased.
                 else:
@@ -78,17 +79,19 @@ def getExif(image):
 # TODO Delete all relevant EXIF data
 def killExif(image):
     try:
-        #image.delete('make')
-        #image.delete('software')
-        #image.delete('f_number')
-        #image.delete('model')
-        #image.delete('datetime')
-        #image.delete('datetime_digitized')
-        #image.delete('datetime_original')
+        image.delete('make')
+        image.delete('software')
+        image.delete('f_number')
+        image.delete('model')
+        image.delete('datetime')
+        image.delete('datetime_digitized')
+        image.delete('datetime_original')
         # remove in production
         print("EXIF data deleted")
-    except TypeError as error:
-        print(error)
+    except TypeError as errorType:
+        print(errorType)
+    except AttributeError as errorAttribute:
+        print(errorAttribute)
 
 # List the available information keys of an image
 def listInfo(image):
