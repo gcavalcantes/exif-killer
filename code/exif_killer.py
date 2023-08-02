@@ -64,8 +64,11 @@ def getExif(image):
     image_members = []
     image_members.append(dir(image))
 
-    print("\nMaker: " + image.make)
-    print("\nMaker: " + image.software)
+    print("\nMaker: {}".format(image.make))
+    print("\nSoftware: {}".format(image.software))
+    print("\nF Number: {}".format(image.f_number))
+    print("\nDate: {}".format(image.datetime))
+    print("\nDate of digitization: {}".format(image.datetime_digitized))
     print("\nModel: " + image.model + "\n")
 
     for index, image_member_list in enumerate(image_members):
@@ -74,9 +77,18 @@ def getExif(image):
 
 # TODO Delete all relevant EXIF data
 def killExif(image):
-    #image.delete('gps_latitude')
-    # remove in production
-    print("EXIF data deleted")
+    try:
+        #image.delete('make')
+        #image.delete('software')
+        #image.delete('f_number')
+        #image.delete('model')
+        #image.delete('datetime')
+        #image.delete('datetime_digitized')
+        #image.delete('datetime_original')
+        # remove in production
+        print("EXIF data deleted")
+    except TypeError as error:
+        print(error)
 
 # List the available information keys of an image
 def listInfo(image):
