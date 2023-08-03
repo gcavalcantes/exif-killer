@@ -3,53 +3,47 @@ from exif import Image
 
 imagePath = '/Users/Cliente/Pictures/Saved Pictures/temp/bsg1.jpg'
 
+
 def exifKiller(file_path):
     # Check if the file exists
     if os.path.isfile(file_path):
-        # remove in production
-        print("File exists. Proceding with operations...")
         # Copies the file
         with open(file_path, "rb") as file_image:
-            # remove in production
             if checkFileType(file_path):
                 image = Image(file_image)
-                print("File successfuly opened. Proceding... ")
-
                 # Detects existing exif data
                 if checkExif(image):
-                    # remove in production
-                    print("Exif data detected. Proceding...")
                     getExif(image)
                     # Erases the exif data
                     killExif(image)
-                    getExif(image)
-                    # TODO Checks if the data has been erased
-                    # TODO Show message that confirms that the data has bee erased.
+                    saveChanges(image)
+
                 else:
-                    # remove in production
-                    print("Exif data could not be detected. Ending operations.")
+                    # TODO If no exif data is detected, show message and end operations.
+                    pass
             else:
-                print("File type invalid. Ending operations.")
+                # TODO If file type is incorrect, show error message and end operations.
+                pass
     else:
-        print("File could not be found. Ending operations.")
+        # TODO If path to file cannot be found, show error message and end operations.
         pass
 
 # Check if the file is of a valid format
+
+
 def checkFileType(file):
     # List of accepted extensions
     accepted_extensions = [".png", '.jpg', ".jfif", ".jpeg", ".bmp"]
     file_name, file_extension = os.path.splitext(file)
-    
-    if file_extension.lower() in accepted_extensions :
-        # remove in production
-        print("File extension for {} is accepted. Proceding...".format(file_name + file_extension))
+
+    if file_extension.lower() in accepted_extensions:
         return True
     else:
         return False
-    #print("File Type is: {} ".format(file_extension)) # remove in production
-    #print("File Name is: {} ".format(file_name)) # remove in production
 
 # Detects existing exif data
+
+
 def checkExif(image):
     status = ''
     if image.has_exif:
@@ -60,8 +54,10 @@ def checkExif(image):
         status = "does not contain any EXIF information."
         print(f"Image {status}")
         return False
-    
-# TODO Shows the exif data
+
+# Shows the exif data
+
+
 def getExif(image):
     image_members = []
     image_members.append(dir(image))
@@ -77,26 +73,21 @@ def getExif(image):
         print(f"Image {index} contains {len(image_member_list)} members:")
         print(f"{image_member_list}\n")
 
-# TODO Delete all relevant EXIF data
+# Delete all relevant EXIF data
+
+
 def killExif(image):
     try:
-        # image.delete('make')
-        # image.delete('software')
-        # image.delete('f_number')
-        # image.delete('model')
-        # image.delete('datetime')
-        # image.delete('datetime_digitized')
-        # image.delete('datetime_original')
         image.delete_all()
-        # remove in production
-        print("EXIF data deleted.")
-        
+
     except TypeError as errorType:
         print(errorType)
     except AttributeError as errorAttribute:
         print(errorAttribute)
 
 # List the available information keys of an image
+
+
 def listInfo(image):
     image_members = []
     image_members.append(dir(image))
@@ -105,11 +96,13 @@ def listInfo(image):
         print(f"Image {index} contains {len(image_member_list)} members:")
         print(f"{image_member_list}\n")
 
-# TODO Save the changes made to the image
+# Save the changes made to the image
+
+
 def saveChanges(image):
     with open(imagePath, 'wb') as updated_image_file:
         updated_image_file.write(image.get_file())
-        print("File changes have been saved!")
 
-# Testing the function
+
+# Calling the function
 exifKiller(imagePath)
