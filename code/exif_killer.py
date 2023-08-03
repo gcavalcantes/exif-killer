@@ -1,6 +1,7 @@
 import os.path
 from exif import Image
 
+imagePath = '/Users/Cliente/Pictures/Saved Pictures/temp/bsg1.jpg'
 
 def exifKiller(file_path):
     # Check if the file exists
@@ -79,15 +80,17 @@ def getExif(image):
 # TODO Delete all relevant EXIF data
 def killExif(image):
     try:
-        image.delete('make')
-        image.delete('software')
-        image.delete('f_number')
-        image.delete('model')
-        image.delete('datetime')
-        image.delete('datetime_digitized')
-        image.delete('datetime_original')
+        # image.delete('make')
+        # image.delete('software')
+        # image.delete('f_number')
+        # image.delete('model')
+        # image.delete('datetime')
+        # image.delete('datetime_digitized')
+        # image.delete('datetime_original')
+        image.delete_all()
         # remove in production
-        print("EXIF data deleted")
+        print("EXIF data deleted.")
+        
     except TypeError as errorType:
         print(errorType)
     except AttributeError as errorAttribute:
@@ -102,5 +105,11 @@ def listInfo(image):
         print(f"Image {index} contains {len(image_member_list)} members:")
         print(f"{image_member_list}\n")
 
+# TODO Save the changes made to the image
+def saveChanges(image):
+    with open(imagePath, 'wb') as updated_image_file:
+        updated_image_file.write(image.get_file())
+        print("File changes have been saved!")
+
 # Testing the function
-exifKiller('/Users/Cliente/Pictures/Saved Pictures/temp/bsg1.jpg')
+exifKiller(imagePath)
