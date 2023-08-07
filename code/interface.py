@@ -1,20 +1,24 @@
 try:
-    # for Python2
-    from Tkinter import *
-except ImportError:
     # for Python3
     from tkinter import *
+except ImportError:
+    # for Python2
+    from Tkinter import *
+
 
 class Interface():
     # TODO Creates a screen for the main window
-    def __init__(self, master = None):
+    def __init__(self, master=None):
         # Changes the window name
         master.title("Exif Killer")
+        # Changes the dimensions of the window
+        master.geometry('600x400')
         # Main frame of the program's window
         self.widget_main = Frame(master)
         self.widget_main.pack()
         # Message at the top of the screen
-        self.message = Label(self.widget_main, text="Relevant messages are shown here")
+        self.message = Label(
+            self.widget_main, text="Relevant messages are shown here")
         self.message["font"] = ("Verdana", "10", "italic", "bold")
         self.message.pack()
         # Kill Exif button
@@ -35,6 +39,7 @@ class Interface():
     # TODO call the exif killer function
     def killExif(self, event):
         pass
+
 
 root = Tk()
 Interface(root)
