@@ -1,8 +1,16 @@
-from tkinter import *
+try:
+    # for Python2
+    from Tkinter import *
+except ImportError:
+    # for Python3
+    from tkinter import *
 
 class Interface():
     # TODO Creates a screen for the main window
     def __init__(self, master = None):
+        # Changes the window name
+        master.title("Exif Killer")
+        # Main frame of the program's window
         self.widget_main = Frame(master)
         self.widget_main.pack()
         # Message at the top of the screen
