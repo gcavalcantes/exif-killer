@@ -33,9 +33,13 @@ class Interface():
         self.toolbar.pack(side=TOP, fill=X)
 
         # TODO Create the options menu items
+        self.menu_options.add_separator()
         self.menu_options.add_command(
             label="Exit", command=self.widget_main.quit)
 
+        # TODO Input for the image path
+        self.user_input = Entry(self.widget_main, width=50)
+        self.user_input.pack(side=LEFT)
         # Message at the top of the screen
         self.message = Label(
             self.widget_main, text="Relevant messages are shown here")
@@ -58,8 +62,12 @@ class Interface():
         self.exit["command"] = self.widget_main.quit
         self.exit.pack(side=RIGHT)
 
-    # TODO call the exif killer function
+    # TODO Call the exif killer function
     def killExif(self, event):
+        pass
+
+    # TODO About window
+    def aboutWindow(self, event):
         pass
 
 
