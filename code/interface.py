@@ -12,7 +12,7 @@ class Interface():
         # Changes the window name
         master.title("Exif Killer")
         # Changes the dimensions of the window
-        master.geometry('600x400+50+50')
+        master.geometry('450x125+50+50')
         # Main frame of the app's window
         self.widget_main = Frame(master)
         self.widget_main.pack()
@@ -37,22 +37,35 @@ class Interface():
         self.menu_options.add_command(
             label="Exit", command=self.widget_main.quit)
 
+        # TODO Labe for the image path
+        self.user_input_label = Label(self.widget_main, text="Select the image: ")
+        self.user_input_label.grid(row=0, column=0, sticky= NW)
+
         # TODO Input for the image path
         self.user_input = Entry(self.widget_main, width=50)
-        self.user_input.pack(side=LEFT)
+        self.user_input.grid(row=1, column=0, sticky=NW)
+        
         # Message at the top of the screen
         self.message = Label(
-            self.widget_main, text="Relevant messages are shown here")
+            self.widget_main, text="Status: Waiting for command")
         self.message["font"] = ("Verdana", "10", "italic", "bold")
-        self.message.pack()
+        self.message.grid(row=2, column=0, sticky=NW)
+
+        # TODO Select image button
+        self.select_file_button = Button(self.widget_main)
+        self.select_file_button["text"] = "Select File"
+        self.select_file_button["font"] = ("Verdana", "10")
+        self.select_file_button["width"] = 9
+        self.select_file_button.bind("<Button-1>")
+        self.select_file_button.grid(row=1, column=1, sticky=NE, padx=4)
 
         # Kill Exif button
         self.kill_exif = Button(self.widget_main)
         self.kill_exif["text"] = "Kill Exif"
         self.kill_exif["font"] = ("Verdana", "10")
-        self.kill_exif["width"] = 5
+        self.kill_exif["width"] = 6
         self.kill_exif.bind("<Button-1>", self.killExif)
-        self.kill_exif.pack(side=LEFT)
+        self.kill_exif.grid(row=3, column=0, sticky=W)
 
         # Exit button
         self.exit = Button(self.widget_main)
@@ -60,7 +73,7 @@ class Interface():
         self.exit["font"] = ("Verdana", "10")
         self.exit["width"] = 5
         self.exit["command"] = self.widget_main.quit
-        self.exit.pack(side=RIGHT)
+        self.exit.grid(row=3, column=1, sticky=E)
 
     # TODO Call the exif killer function
     def killExif(self, event):
