@@ -5,10 +5,13 @@ except ImportError:
     # for Python2
     from Tkinter import *
 
+from tkinter import filedialog
+import exif_killer as ek
+
 
 class Interface():
     # TODO Creates a screen for the main window
-    def __init__(self, master=None):
+    def __init__(self, master=None, user_input = Entry):
         # Changes the window name
         master.title("Exif Killer")
         # Changes the dimensions of the window
@@ -38,13 +41,14 @@ class Interface():
             label="Exit", command=self.widget_main.quit)
 
         # TODO Labe for the image path
-        self.user_input_label = Label(self.widget_main, text="Select the image: ")
-        self.user_input_label.grid(row=0, column=0, sticky= NW)
+        self.user_input_label = Label(
+            self.widget_main, text="Select the image: ")
+        self.user_input_label.grid(row=0, column=0, sticky=NW)
 
         # TODO Input for the image path
         self.user_input = Entry(self.widget_main, width=50)
         self.user_input.grid(row=1, column=0, sticky=NW)
-        
+
         # Message at the top of the screen
         self.message = Label(
             self.widget_main, text="Status: Waiting for command")
@@ -52,7 +56,7 @@ class Interface():
         self.message.grid(row=2, column=0, sticky=NW)
 
         # TODO Select image button
-        self.select_file_button = Button(self.widget_main)
+        self.select_file_button = Button(self.widget_main, command=self.browseFiles)
         self.select_file_button["text"] = "Select File"
         self.select_file_button["font"] = ("Verdana", "10")
         self.select_file_button["width"] = 9
@@ -83,6 +87,17 @@ class Interface():
     def aboutWindow(self, event):
         pass
 
+    # Browse files
+    def browseFiles(self):
+        accepted_images = [".png", '.jpg', ".jfif", ".jpeg", ".bmp"]
+        filename = filedialog.askopenfile(initialdir="/",
+                                              title="Select a File",
+                                              filetypes=(("Image files",
+                                                          accepted_images),
+                                                         ("all files",
+                                                          "*.*")))
+        # TODO Change the text in the input 
+        self.user_input["text"] = filename
 
 root = Tk()
 Interface(root)
