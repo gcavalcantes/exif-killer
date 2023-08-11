@@ -1,9 +1,6 @@
 import os.path
 from exif import Image
 
-imagePath = '/Users/Cliente/Pictures/Saved Pictures/temp/bsg1.jpg'
-
-
 def exifKiller(file_path):
     # Check if the file exists
     if os.path.isfile(file_path):
@@ -16,7 +13,7 @@ def exifKiller(file_path):
                     getExif(image)
                     # Erases the exif data
                     killExif(image)
-                    saveChanges(image)
+                    saveChanges(image, file_path)
 
                 else:
                     # TODO If no exif data is detected, show message and end operations.
@@ -99,10 +96,7 @@ def listInfo(image):
 # Save the changes made to the image
 
 
-def saveChanges(image):
-    with open(imagePath, 'wb') as updated_image_file:
+def saveChanges(image, image_path):
+    with open(image_path, 'wb') as updated_image_file:
         updated_image_file.write(image.get_file())
 
-
-# Calling the function
-exifKiller(imagePath)
