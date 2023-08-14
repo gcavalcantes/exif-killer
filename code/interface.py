@@ -11,7 +11,7 @@ import exif_killer as ek
 
 class Interface():
     # TODO Creates a screen for the main window
-    def __init__(self, master=None, user_input = Entry):
+    def __init__(self, master=None, text_variable=None):
         # Changes the window name
         master.title("Exif Killer")
         # Changes the dimensions of the window
@@ -47,6 +47,7 @@ class Interface():
 
         # TODO Input for the image path
         self.user_input = Entry(self.widget_main, width=50)
+        self.user_input["text"] = text_variable
         self.user_input.grid(row=1, column=0, sticky=NW)
 
         # Message at the top of the screen
@@ -97,8 +98,9 @@ class Interface():
                                                          ("all files",
                                                           "*.*")))
         # TODO Change the text in the input 
-        self.user_input["text"] = filename
+        self.user_input.insert(0, filename.name)
 
+# Runs the app.
 root = Tk()
 Interface(root)
 root.mainloop()
