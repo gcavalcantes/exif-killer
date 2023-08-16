@@ -100,7 +100,8 @@ class Interface():
         # TODO Change the text in the input 
         self.user_input.insert(0, filename.name)
 
-# Runs the app.
-root = Tk()
-Interface(root)
-root.mainloop()
+if __name__ == "__main__":
+    # Runs the app.
+    root = Tk()
+    Interface(root)
+    root.mainloop()
