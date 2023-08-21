@@ -2,3 +2,7 @@ venv
 Python
 .venv
 code/__pycache__/exif_killer.cpython-39.pyc
+code/text.exe
+code/__pycache__/about_window.cpython-39.pyc
+.vscode/tasks.json
+.vscode/settings.json
