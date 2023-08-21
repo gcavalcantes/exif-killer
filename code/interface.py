@@ -1,11 +1,11 @@
 try:
     # for Python3
     from tkinter import *
+    from tkinter import filedialog
 except ImportError:
     # for Python2
     from Tkinter import *
 
-from tkinter import filedialog
 import exif_killer as ek
 
 
@@ -35,12 +35,17 @@ class Interface():
         self.toolbar = Label(master)
         self.toolbar.pack(side=TOP, fill=X)
 
-        # TODO Create the options menu items
+        # Create the options menu items
         self.menu_options.add_separator()
         self.menu_options.add_command(
             label="Exit", command=self.widget_main.quit)
 
-        # TODO Labe for the image path
+        # TODO Option that opens the about window
+        self.menu_about.add_command(
+            label="About this program", command=lambda: self.aboutWindow(master)
+        )
+
+        # Labe for the image path
         self.user_input_label = Label(
             self.widget_main, text="Select the image: ")
         self.user_input_label.grid(row=0, column=0, sticky=NW)
@@ -57,7 +62,8 @@ class Interface():
         self.message.grid(row=2, column=0, sticky=NW)
 
         # TODO Select image button
-        self.select_file_button = Button(self.widget_main, command=self.browseFiles)
+        self.select_file_button = Button(
+            self.widget_main, command=self.browseFiles)
         self.select_file_button["text"] = "Select File"
         self.select_file_button["font"] = ("Verdana", "10")
         self.select_file_button["width"] = 9
@@ -85,20 +91,25 @@ class Interface():
         pass
 
     # TODO About window
-    def aboutWindow(self, event):
-        pass
+    def aboutWindow(self, window):
+        about = Toplevel(window)
+        about.title("About this program")
+        about.geometry("200x200")
+        version_label = Label(about, text="Exif Killer version: 0.0.1")
+        version_label.pack()
 
     # Browse files
     def browseFiles(self):
         accepted_images = [".png", '.jpg', ".jfif", ".jpeg", ".bmp"]
         filename = filedialog.askopenfile(initialdir="/",
-                                              title="Select a File",
-                                              filetypes=(("Image files",
-                                                          accepted_images),
-                                                         ("all files",
-                                                          "*.*")))
-        # TODO Change the text in the input 
+                                          title="Select a File",
+                                          filetypes=(("Image files",
+                                                      accepted_images),
+                                                     ("all files",
+                                                      "*.*")))
+        # TODO Change the text in the input
         self.user_input.insert(0, filename.name)
+
 
 if __name__ == "__main__":
     # Runs the app.
