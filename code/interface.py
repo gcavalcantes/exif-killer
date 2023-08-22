@@ -92,11 +92,14 @@ class Interface():
 
     # TODO About window
     def aboutWindow(self, window):
+        credits_message = "Code and interface: Gabriel Cavalcante"
         about = Toplevel(window)
         about.title("About this program")
-        about.geometry("200x200")
+        about.geometry("250x200")
         version_label = Label(about, text="Exif Killer version: 0.0.1")
         version_label.pack()
+        credits_label = Label(about, text=credits_message)
+        credits_label.pack()
 
     # Browse files
     def browseFiles(self):
