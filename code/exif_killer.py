@@ -1,6 +1,7 @@
 import os.path
 from exif import Image
 
+
 def exifKiller(file_path):
     # Check if the file exists
     if os.path.isfile(file_path):
@@ -99,4 +100,3 @@ def listInfo(image):
 def saveChanges(image, image_path):
     with open(image_path, 'wb') as updated_image_file:
         updated_image_file.write(image.get_file())
-

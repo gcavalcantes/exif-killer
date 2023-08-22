@@ -50,8 +50,10 @@ class Interface():
             self.widget_main, text="Select the image: ")
         self.user_input_label.grid(row=0, column=0, sticky=NW)
 
+        # Get the user input
+        self.input = StringVar(master)
         # TODO Input for the image path
-        self.user_input = Entry(self.widget_main, width=50)
+        self.user_input = Entry(self.widget_main, textvariable=input, width=50)
         self.user_input["text"] = text_variable
         self.user_input.grid(row=1, column=0, sticky=NW)
 
@@ -71,11 +73,12 @@ class Interface():
         self.select_file_button.grid(row=1, column=1, sticky=NE, padx=4)
 
         # Kill Exif button
-        self.kill_exif = Button(self.widget_main)
+        self.kill_exif = Button(
+            self.widget_main, command=lambda:  self.killExif(input))
         self.kill_exif["text"] = "Kill Exif"
         self.kill_exif["font"] = ("Verdana", "10")
         self.kill_exif["width"] = 6
-        self.kill_exif.bind("<Button-1>", self.killExif)
+        self.kill_exif.bind("<Button-1>")
         self.kill_exif.grid(row=3, column=0, sticky=W)
 
         # Exit button
@@ -87,8 +90,9 @@ class Interface():
         self.exit.grid(row=3, column=1, sticky=E)
 
     # TODO Call the exif killer function
-    def killExif(self, event):
-        pass
+    def killExif(self, path):
+        killer = ek()
+        killer.exifKiller(path)
 
     # TODO About window
     def aboutWindow(self, window):
