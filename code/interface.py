@@ -20,6 +20,10 @@ class Interface():
         self.widget_main = Frame(master)
         self.widget_main.pack()
 
+        # Status of the exif killing process.
+        self.STATUS = ["Exif content has successfuly been deleted",
+                  "No exif content has been detected", "Falha ao carregar arquivo", "", ""]
+
         # Menu bar
         self.menu_bar = Menu()
         self.menu_about = Menu(self.menu_bar, tearoff=False)
@@ -74,7 +78,7 @@ class Interface():
 
         # Kill Exif button
         self.kill_exif = Button(
-            self.widget_main, command=lambda:  self.killExif(input))
+            self.widget_main, command=lambda:  self.killExif(str(input)))
         self.kill_exif["text"] = "Kill Exif"
         self.kill_exif["font"] = ("Verdana", "10")
         self.kill_exif["width"] = 6
@@ -91,18 +95,27 @@ class Interface():
 
     # TODO Call the exif killer function
     def killExif(self, path):
-        exifKiller(path)
+        print(path)
+        if (path != ''):
+            try:
+                exifKiller(path)
+
+            except AttributeError as atrib_error:
+                print(atrib_error)
+            else:
+                self.message["text"] = self.STATUS[2]
 
     # TODO About window
+
     def aboutWindow(self, window):
         credits_message = "Code and interface: Gabriel Cavalcante"
         about = Toplevel(window)
         about.title("About this program")
         about.geometry("250x200")
         version_label = Label(about, text="Exif Killer version: 0.0.1")
-        version_label.pack()
+        version_label.grid()
         credits_label = Label(about, text=credits_message)
-        credits_label.pack()
+        credits_label.grid()
 
     # Browse files
     def browseFiles(self):
