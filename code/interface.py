@@ -6,7 +6,7 @@ except ImportError:
     # for Python2
     from Tkinter import *
 
-import exif_killer as ek
+from exif_killer import exifKiller
 
 
 class Interface():
@@ -91,8 +91,7 @@ class Interface():
 
     # TODO Call the exif killer function
     def killExif(self, path):
-        killer = ek()
-        killer.exifKiller(path)
+        exifKiller(path)
 
     # TODO About window
     def aboutWindow(self, window):
