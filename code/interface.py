@@ -96,7 +96,7 @@ class Interface():
     # TODO Call the exif killer function
     def killExif(self, path):
         print(path)
-        if (path != ''):
+        if (path != '' or path != None):
             try:
                 exifKiller(path)
 
