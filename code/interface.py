@@ -10,7 +10,7 @@ from exif_killer import exifKiller
 
 
 class Interface():
-    # TODO Creates a screen for the main window
+    # Creates a screen for the main window
     def __init__(self, master=None, text_variable=None):
         # Changes the window name
         master.title("Exif Killer")
@@ -22,7 +22,7 @@ class Interface():
 
         # Status of the exif killing process.
         self.STATUS = ["Exif content has successfuly been deleted",
-                  "No exif content has been detected", "Falha ao carregar arquivo", "", ""]
+                       "No exif content has been detected", "Falha ao carregar arquivo", "", ""]
 
         # Menu bar
         self.menu_bar = Menu()
@@ -44,7 +44,7 @@ class Interface():
         self.menu_options.add_command(
             label="Exit", command=self.widget_main.quit)
 
-        # TODO Option that opens the about window
+        # Option that opens the about window
         self.menu_about.add_command(
             label="About this program", command=lambda: self.aboutWindow(master)
         )
@@ -56,9 +56,8 @@ class Interface():
 
         # Get the user input
         self.input = StringVar(master)
-        # TODO Input for the image path
+        # Input for the image path
         self.user_input = Entry(self.widget_main, textvariable=input, width=50)
-        self.user_input["text"] = text_variable
         self.user_input.grid(row=1, column=0, sticky=NW)
 
         # Message at the top of the screen
@@ -67,7 +66,7 @@ class Interface():
         self.message["font"] = ("Verdana", "10", "italic", "bold")
         self.message.grid(row=2, column=0, sticky=NW)
 
-        # TODO Select image button
+        # Select image button
         self.select_file_button = Button(
             self.widget_main, command=self.browseFiles)
         self.select_file_button["text"] = "Select File"
@@ -78,7 +77,7 @@ class Interface():
 
         # Kill Exif button
         self.kill_exif = Button(
-            self.widget_main, command=lambda:  self.killExif(str(input)))
+            self.widget_main, command=lambda:  self.killExif(self.user_input.get()))
         self.kill_exif["text"] = "Kill Exif"
         self.kill_exif["font"] = ("Verdana", "10")
         self.kill_exif["width"] = 6
@@ -93,9 +92,8 @@ class Interface():
         self.exit["command"] = self.widget_main.quit
         self.exit.grid(row=3, column=1, sticky=E)
 
-    # TODO Call the exif killer function
+    # Call the exif killer function
     def killExif(self, path):
-        print(path)
         if (path != '' or path != None):
             try:
                 exifKiller(path)
@@ -105,8 +103,7 @@ class Interface():
             else:
                 self.message["text"] = self.STATUS[2]
 
-    # TODO About window
-
+    # About window
     def aboutWindow(self, window):
         credits_message = "Code and interface: Gabriel Cavalcante"
         about = Toplevel(window)
@@ -126,7 +123,7 @@ class Interface():
                                                       accepted_images),
                                                      ("all files",
                                                       "*.*")))
-        # TODO Change the text in the input
+        # Change the text in the input
         self.user_input.insert(0, filename.name)
 
 
