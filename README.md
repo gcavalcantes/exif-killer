@@ -1,5 +1,5 @@
 # exif-killer
- A Python program do delete exif data from files. It includes a GUI.
+ A Python program to delete exif data from files. It includes a GUI.
 
 ## Prerequisites
 Python 3 or Python 2.
