@@ -12,7 +12,7 @@ Please note that eventually an executable will be made for this application.
 - [ ] Make an executable for the application.
 - [ ] Add threading for multiple file selection.
 - [ ] Add multiple file selection.
-- [ ] Allow for the selection of and entire folder.
+- [ ] Allow for the selection of an entire folder.
 
 # Credits
 Code and design - Gabriel Cavalcante
