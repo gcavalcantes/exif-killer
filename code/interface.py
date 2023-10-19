@@ -6,11 +6,29 @@ except ImportError:
     # for Python2
     from Tkinter import *
 
+import sys
+import os
 from exif_killer import exifKiller
 
 
+def resource_path(relative_path):
+    """Get absolute path to resource, works for dev and for PyInstaller.
+    https://stackoverflow.com/questions/31836104/pyinstaller-and-onefile-how-to-include-an-image-in-the-exe-file
+    """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS2
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
+Logo = resource_path("Logo.png")
+
+
 class Interface():
-    # Creates a screen for the main window
+    """Creates a screen for the main window."""
     def __init__(self, master=None, text_variable=None):
         # Changes the window name
         master.title("Exif Killer")
@@ -92,8 +110,8 @@ class Interface():
         self.exit["command"] = self.widget_main.quit
         self.exit.grid(row=3, column=1, sticky=E)
 
-    # Call the exif killer function
     def killExif(self, path):
+        """Call the exif killer function."""
         if (path != '' or path != None):
             try:
                 exifKiller(path)
@@ -103,8 +121,8 @@ class Interface():
             else:
                 self.message["text"] = self.STATUS[2]
 
-    # About window
     def aboutWindow(self, window):
+        """About window."""
         credits_message = "Code and interface: Gabriel Cavalcante"
         about = Toplevel(window)
         about.title("About this program")
@@ -114,8 +132,8 @@ class Interface():
         credits_label = Label(about, text=credits_message)
         credits_label.grid()
 
-    # Browse files
     def browseFiles(self):
+        """Browse files."""
         accepted_images = [".png", '.jpg', ".jfif", ".jpeg", ".bmp"]
         filename = filedialog.askopenfile(initialdir="/",
                                           title="Select a File",
@@ -128,7 +146,7 @@ class Interface():
 
 
 if __name__ == "__main__":
-    # Runs the app.
+    """Runs the app."""
     root = Tk()
     Interface(root)
     root.mainloop()

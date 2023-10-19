@@ -3,6 +3,7 @@ from exif import Image
 
 
 def exifKiller(file_path):
+    """Main function."""
     # Check if the file exists
     if os.path.isfile(file_path):
         # Copies the file
@@ -26,10 +27,9 @@ def exifKiller(file_path):
         # TODO If path to file cannot be found, show error message and end operations.
         pass
 
-# Check if the file is of a valid format
-
 
 def checkFileType(file):
+    """Check if the file is of a valid format."""
     # List of accepted extensions
     accepted_extensions = [".png", '.jpg', ".jfif", ".jpeg", ".bmp"]
     file_name, file_extension = os.path.splitext(file)
@@ -39,10 +39,9 @@ def checkFileType(file):
     else:
         return False
 
-# Detects existing exif data
-
 
 def checkExif(image):
+    """Detects existing exif data."""
     status = ''
     if image.has_exif:
         status = f"contains EXIF (version {image.exif_version}) information."
@@ -53,10 +52,9 @@ def checkExif(image):
         print(f"Image {status}")
         return False
 
-# Shows the exif data
-
 
 def getExif(image):
+    """Shows the exif data."""
     image_members = []
     image_members.append(dir(image))
 
@@ -71,10 +69,9 @@ def getExif(image):
         print(f"Image {index} contains {len(image_member_list)} members:")
         print(f"{image_member_list}\n")
 
-# Delete all relevant EXIF data
-
 
 def killExif(image):
+    """Delete all relevant EXIF data."""
     try:
         image.delete_all()
 
@@ -83,10 +80,9 @@ def killExif(image):
     except AttributeError as errorAttribute:
         print(errorAttribute)
 
-# List the available information keys of an image
-
 
 def listInfo(image):
+    """List the available information keys of an image."""
     image_members = []
     image_members.append(dir(image))
 
@@ -94,9 +90,7 @@ def listInfo(image):
         print(f"Image {index} contains {len(image_member_list)} members:")
         print(f"{image_member_list}\n")
 
-# Save the changes made to the image
-
-
 def saveChanges(image, image_path):
+    """Save the changes made to the image."""
     with open(image_path, 'wb') as updated_image_file:
         updated_image_file.write(image.get_file())
