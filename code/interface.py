@@ -9,6 +9,7 @@ except ImportError:
 import sys
 import os
 from exif_killer import exifKiller
+import webbrowser
 
 
 def resource_path(relative_path):
@@ -29,6 +30,7 @@ Logo = resource_path("Logo.png")
 
 class Interface():
     """Creates a screen for the main window."""
+
     def __init__(self, master=None, text_variable=None):
         # Changes the window name
         master.title("Exif Killer")
@@ -121,6 +123,10 @@ class Interface():
             else:
                 self.message["text"] = self.STATUS[2]
 
+    def open_link(self):
+        """Opens a link in the default browser."""
+        webbrowser.open_new("https://github.com/gcavalcantes/exif-killer")
+
     def aboutWindow(self, window):
         """About window."""
         credits_message = "Code and interface: Gabriel Cavalcante"
@@ -131,6 +137,9 @@ class Interface():
         version_label.grid()
         credits_label = Label(about, text=credits_message)
         credits_label.grid()
+        repo_link_button = Button(
+            about, text="Link to Git repository", fg="blue", cursor="hand2", command=self.open_link)
+        repo_link_button.grid()
 
     def browseFiles(self):
         """Browse files."""
@@ -143,7 +152,6 @@ class Interface():
                                                       "*.*")))
         # Change the text in the input
         self.user_input.insert(0, filename.name)
-
 
 if __name__ == "__main__":
     """Runs the app."""
