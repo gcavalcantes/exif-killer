@@ -2,7 +2,7 @@
  A Python program to delete exif data from files. It includes a GUI.
 
 ## Prerequisites
-Python 3 or Python 2.
+Python 3 is recommended, but this program is also compatible with Python 2.
 
 ## Usage
 Execute the interface file in the terminal of your choice.
