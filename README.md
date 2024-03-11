@@ -10,8 +10,9 @@ Please note that eventually an executable will be made for this application.
 
 ## Next steps
 - [ ] Make an executable for the application.
-- [ ] Add threading for multiple file selection.
+- [ ] Add the creation of a log file for better debugging.
 - [ ] Add multiple file selection.
+- [ ] Add multithreading for multiple file selection and execution.
 - [ ] Allow for the selection of an entire folder.
 
 # Credits
